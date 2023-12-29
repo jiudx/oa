@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.mapper.VcardMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.pojo.Vcard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="usetime" property="usetime" jdbcType="TIMESTAMP" />
+    <result column="deptid" property="deptid" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="adminid" property="adminid" jdbcType="INTEGER" />
+    <result column="lauchtime" property="lauchtime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userid, usetime, deptid, job, phone, number, adminid, lauchtime, remark, state, 
+    isdelete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.pojo.VcardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vcard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from vcard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from vcard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.pojo.VcardExample" >
+    delete from vcard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.pojo.Vcard" >
+    insert into vcard (id, userid, usetime, 
+      deptid, job, phone, 
+      number, adminid, lauchtime, 
+      remark, state, isdelete
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{usetime,jdbcType=TIMESTAMP}, 
+      #{deptid,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{adminid,jdbcType=INTEGER}, #{lauchtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{isdelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.pojo.Vcard" >
+    insert into vcard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="usetime != null" >
+        usetime,
+      </if>
+      <if test="deptid != null" >
+        deptid,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="adminid != null" >
+        adminid,
+      </if>
+      <if test="lauchtime != null" >
+        lauchtime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        #{usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="lauchtime != null" >
+        #{lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.pojo.VcardExample" resultType="java.lang.Integer" >
+    select count(*) from vcard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vcard
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usetime != null" >
+        usetime = #{record.usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deptid != null" >
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        adminid = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lauchtime != null" >
+        lauchtime = #{record.lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vcard
+    set id = #{record.id,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      usetime = #{record.usetime,jdbcType=TIMESTAMP},
+      deptid = #{record.deptid,jdbcType=INTEGER},
+      job = #{record.job,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      adminid = #{record.adminid,jdbcType=INTEGER},
+      lauchtime = #{record.lauchtime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      isdelete = #{record.isdelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.pojo.Vcard" >
+    update vcard
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        usetime = #{usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptid != null" >
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        adminid = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="lauchtime != null" >
+        lauchtime = #{lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.pojo.Vcard" >
+    update vcard
+    set userid = #{userid,jdbcType=INTEGER},
+      usetime = #{usetime,jdbcType=TIMESTAMP},
+      deptid = #{deptid,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      adminid = #{adminid,jdbcType=INTEGER},
+      lauchtime = #{lauchtime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      isdelete = #{isdelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

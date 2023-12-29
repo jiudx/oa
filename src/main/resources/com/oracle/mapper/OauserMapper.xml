@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.mapper.OauserMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.pojo.Oauser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="loginname" property="loginname" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="truename" property="truename" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="roleid" property="roleid" jdbcType="INTEGER" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="deptid" property="deptid" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, loginname, password, truename, idcard, age, phone, sex, job, photo, roleid, orgid, 
+    deptid, state, isdelete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.pojo.OauserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from oauser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from oauser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from oauser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.pojo.OauserExample" >
+    delete from oauser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.pojo.Oauser" >
+    insert into oauser (id, loginname, password, 
+      truename, idcard, age, 
+      phone, sex, job, photo, 
+      roleid, orgid, deptid, 
+      state, isdelete)
+    values (#{id,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{truename,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{roleid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{isdelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.pojo.Oauser" >
+    insert into oauser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginname != null" >
+        loginname,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="truename != null" >
+        truename,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="deptid != null" >
+        deptid,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="truename != null" >
+        #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.pojo.OauserExample" resultType="java.lang.Integer" >
+    select count(*) from oauser
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update oauser
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginname != null" >
+        loginname = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.truename != null" >
+        truename = #{record.truename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null" >
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleid != null" >
+        roleid = #{record.roleid,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgid != null" >
+        orgid = #{record.orgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null" >
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update oauser
+    set id = #{record.id,jdbcType=INTEGER},
+      loginname = #{record.loginname,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      truename = #{record.truename,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      job = #{record.job,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      roleid = #{record.roleid,jdbcType=INTEGER},
+      orgid = #{record.orgid,jdbcType=INTEGER},
+      deptid = #{record.deptid,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      isdelete = #{record.isdelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.pojo.Oauser" >
+    update oauser
+    <set >
+      <if test="loginname != null" >
+        loginname = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="truename != null" >
+        truename = #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        roleid = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.pojo.Oauser" >
+    update oauser
+    set loginname = #{loginname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      truename = #{truename,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      roleid = #{roleid,jdbcType=INTEGER},
+      orgid = #{orgid,jdbcType=INTEGER},
+      deptid = #{deptid,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      isdelete = #{isdelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

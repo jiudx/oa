@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.mapper.CachetMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.pojo.Cachet" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="deptid" property="deptid" jdbcType="INTEGER" />
+    <result column="adminid" property="adminid" jdbcType="INTEGER" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="usetime" property="usetime" jdbcType="TIMESTAMP" />
+    <result column="lauchtime" property="lauchtime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userid, deptid, adminid, typeid, usetime, lauchtime, remark, state, isdelete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.pojo.CachetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cachet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cachet
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cachet
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.pojo.CachetExample" >
+    delete from cachet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.pojo.Cachet" >
+    insert into cachet (id, userid, deptid, 
+      adminid, typeid, usetime, 
+      lauchtime, remark, state, 
+      isdelete)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
+      #{adminid,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, #{usetime,jdbcType=TIMESTAMP}, 
+      #{lauchtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{isdelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.pojo.Cachet" >
+    insert into cachet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="deptid != null" >
+        deptid,
+      </if>
+      <if test="adminid != null" >
+        adminid,
+      </if>
+      <if test="typeid != null" >
+        typeid,
+      </if>
+      <if test="usetime != null" >
+        usetime,
+      </if>
+      <if test="lauchtime != null" >
+        lauchtime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        #{usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lauchtime != null" >
+        #{lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.pojo.CachetExample" resultType="java.lang.Integer" >
+    select count(*) from cachet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cachet
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null" >
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminid != null" >
+        adminid = #{record.adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeid != null" >
+        typeid = #{record.typeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usetime != null" >
+        usetime = #{record.usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lauchtime != null" >
+        lauchtime = #{record.lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cachet
+    set id = #{record.id,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      deptid = #{record.deptid,jdbcType=INTEGER},
+      adminid = #{record.adminid,jdbcType=INTEGER},
+      typeid = #{record.typeid,jdbcType=INTEGER},
+      usetime = #{record.usetime,jdbcType=TIMESTAMP},
+      lauchtime = #{record.lauchtime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER},
+      isdelete = #{record.isdelete,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.pojo.Cachet" >
+    update cachet
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="adminid != null" >
+        adminid = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        typeid = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="usetime != null" >
+        usetime = #{usetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lauchtime != null" >
+        lauchtime = #{lauchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.pojo.Cachet" >
+    update cachet
+    set userid = #{userid,jdbcType=INTEGER},
+      deptid = #{deptid,jdbcType=INTEGER},
+      adminid = #{adminid,jdbcType=INTEGER},
+      typeid = #{typeid,jdbcType=INTEGER},
+      usetime = #{usetime,jdbcType=TIMESTAMP},
+      lauchtime = #{lauchtime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      isdelete = #{isdelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
